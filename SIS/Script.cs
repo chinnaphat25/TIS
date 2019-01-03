@@ -16,7 +16,7 @@ namespace TIS
     class Script
     {
         //public ConnectDB contxt = new ConnectDB();
-        public string file_conf = "conf.setting";
+        public string file_conf = "conf.setting"; 
         public string file_cpoint = "cpoint.setting";
         public string file_Straps = "settingStraps.setting";
         public string file_around = "around.conf";
