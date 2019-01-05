@@ -7,7 +7,6 @@ using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Net;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -1163,26 +1162,44 @@ namespace TIS
         public void SaveImages(string filename, string cpoint)
         {
             Thread.Sleep(500);
-            Screenshot(filename);
+            try
+            {
+                Screenshot(filename);
 
-            string part = "ftp://10.6.3.201/" + DateTime.Now.ToString("MMM-yyyy") + "/" + cpoint + "/" + DateTime.Now.ToString("dd-MMM-") + (DateTime.Now.Year + 543);
-            if (CreateFTPDirectory(part, cpoint))
-            {
-                uploadFile(part + "/" + filename, "D:\\" + filename, "ftpuser", "admin");
+                /*string part = "ftp://192.168.101.91/" + DateTime.Now.ToString("MMM-yyyy") + "/" + cpoint + "/" + DateTime.Now.ToString("dd-MMM-") + (DateTime.Now.Year + 543);
+                if (CreateFTPDirectory(part, cpoint))
+                {
+                    uploadFile(part + "/" + filename, "D:\\" + filename, "ftpuser", "admin");
+                }
+                else
+                {
+                    uploadFile(part + "/" + filename, "D:\\" + filename, "ftpuser", "admin");
+                }
+
+                if (File.Exists("D:\\" + filename))
+                {
+                    File.Delete("D:\\" + filename);
+                }*/
             }
-            else
+            catch
             {
-                uploadFile(part + "/" + filename, "D:\\" + filename, "ftpuser", "admin");
+
             }
         }
         public void Screenshot(string filename)
         {
             try
             {
+                string path = @"D:\TIS\File\"+DateTime.Now.ToString("MM-yyyy")+"\\";
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
                 bmpScreenshot = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format32bppArgb);
                 gfxScreenshot = Graphics.FromImage(bmpScreenshot);
                 gfxScreenshot.CopyFromScreen(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y, 0, 0, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
-                bmpScreenshot.Save(@"D:\" + filename, ImageFormat.Jpeg);
+                bmpScreenshot.Save(path + filename, ImageFormat.Jpeg);
                 gfxScreenshot.Dispose();
             }
             catch { }
@@ -1223,7 +1240,7 @@ namespace TIS
         {
             directory = DateTime.Now.ToString("MMM-yyyy") + "/" + cpoint + "/" + DateTime.Now.ToString("dd-MMM-") + (DateTime.Now.Year + 543);
             string[] folder = directory.Split('/');
-            string ftp = "ftp://10.6.3.201/";
+            string ftp = "ftp://192.168.101.91/";
             try
             {
                 //create the directory
@@ -1259,35 +1276,5 @@ namespace TIS
                 }
             }
         }
-        /*public void AddStraps(TextBox txt_straps, Form callForm)
-        {
-            Script script = new Script();
-            string query_straps = "SELECT COUNT(*) AS count_row FROM tbl_straps WHERE tbl_straps_status IS NULL ORDER BY tbl_straps_number";
-            MySqlDataReader reader = script.Select_SQL(query_straps);
-            if (reader.Read())
-            {
-                if (int.Parse(reader.GetString("count_row")) < 1)
-                {
-                    if (MessageBox.Show("สายรัดหมด ต้องการเพิ่มสายรัดใหม่ ใช่หรือไม่", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    {
-                        FineAndUser30DayForm addStrapsForm = new FineAndUser30DayForm(txt_straps);
-                        addStrapsForm.ShowDialog();
-                        if (txt_straps.Text == "")
-                        {
-                            callForm.Close();
-                        }
-                    }
-                    else
-                    {
-                        callForm.Close();
-                    }
-                }
-            }
-            else
-            {
-                callForm.Close();
-            }
-        }*/
-
     }
 }

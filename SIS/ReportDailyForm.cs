@@ -605,7 +605,14 @@ namespace TIS
                 }
                 else
                 {
-                    Report_fine.SetParameterValue("date_report", script.GetMontThai(d_start).Split(' ')[0] + " " + script.GetMontThai(d_start).Split(' ')[1] + " - " + script.GetMontThai(d_end));
+                    if (txt_date_start.Value.Year == date_end.Year)
+                    {
+                        Report_fine.SetParameterValue("date_report", script.GetMontThai(d_start).Split(' ')[0] + " " + script.GetMontThai(d_start).Split(' ')[1] + " - " + script.GetMontThai(d_end.AddDays(0)));
+                    }
+                    else
+                    {
+                        Report_fine.SetParameterValue("date_report", script.GetMontThai(d_start).Split(' ')[0] + " " + script.GetMontThai(d_start).Split(' ')[1] + " " + (d_start.Year + 543) + " - " + script.GetMontThai(d_end.AddDays(0)));
+                    }
                 }
                 Report_fine.SetParameterValue("date_job", script.GetMontThai(txt_date_end.Value.AddDays(1)));
             }
@@ -698,7 +705,15 @@ namespace TIS
                 }
                 else
                 {
-                    Report_fine.SetParameterValue("date_report", script.GetMontThai(dStart).Split(' ')[0] + " " + script.GetMontThai(dStart).Split(' ')[1] + " - " + script.GetMontThai(dEnd.AddDays(1)));
+                    if (dStart.Year == dEnd.Year)
+                    {
+                        Report_fine.SetParameterValue("date_report", script.GetMontThai(dStart).Split(' ')[0] + " " + script.GetMontThai(dStart).Split(' ')[1] + " - " + script.GetMontThai(dEnd.AddDays(1)));
+                    }
+                    else
+                    {
+                        Report_fine.SetParameterValue("date_report", script.GetMontThai(dStart).Split(' ')[0] + " " + script.GetMontThai(dStart).Split(' ')[1] + " " + (dStart.Year + 543) + " - " + script.GetMontThai(dEnd.AddDays(1)));
+                    }
+
                 }
                 Report_fine.SetParameterValue("date_job", script.GetMontThai(dEnd.AddDays(1)));
             }
@@ -710,7 +725,14 @@ namespace TIS
                 }
                 else
                 {
-                    Report_fine.SetParameterValue("date_report", script.GetMontThai(dStart).Split(' ')[0] + " " + script.GetMontThai(dStart).Split(' ')[1] + " - " + script.GetMontThai(dStart.AddDays(1)));
+                    if (dStart.Year == dEnd.Year)
+                    {
+                        Report_fine.SetParameterValue("date_report", script.GetMontThai(dStart).Split(' ')[0] + " " + script.GetMontThai(dStart).Split(' ')[1] + " - " + script.GetMontThai(dEnd.AddDays(1)));
+                    }
+                    else
+                    {
+                        Report_fine.SetParameterValue("date_report", script.GetMontThai(dStart).Split(' ')[0] + " " + script.GetMontThai(dStart).Split(' ')[1] + " " + (dStart.Year + 543) + " - " + script.GetMontThai(dEnd.AddDays(1)));
+                    }
                 }
                 Report_fine.SetParameterValue("date_job", script.GetMontThai(dStart.AddDays(1)));
             }
