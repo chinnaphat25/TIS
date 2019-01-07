@@ -22,6 +22,7 @@ namespace TIS
         int day = 30;
         public string line9 = "7";
         Script script = new Script();
+        AdminScript adminScript = new AdminScript();
         public MenuForm()
         {
             InitializeComponent();
@@ -273,7 +274,7 @@ namespace TIS
                 }
                 catch
                 {
-                    MessageBox.Show("มีปัญหาการเชื่อมต่อฐานข้อมูล กรุุณาปิด/เปิดโปรแกรมใหม่ "+e.ToString(), "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("มีปัญหาการเชื่อมต่อฐานข้อมูล กรุุณาปิด/เปิดโปรแกรมใหม่ " + e.ToString(), "ผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     //MessageBox.Show("Error:" + err.ToString(), "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     this.Close();
                 }

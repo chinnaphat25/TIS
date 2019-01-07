@@ -81,7 +81,7 @@ namespace TIS
         {
             if (combo_cpoint.Text != "เลือกด่านฯ")
             {
-                string sql = "SELECT * FROM tbl_income i JOIN tbl_status_around a ON i.tbl_income_around_id = a.tbl_status_around_id WHERE a.tbl_status_around_date = '" + date_value_s.Text + "' AND (i.tbl_income_emp_id Like '%" + txt_emp_s.Text + "%' OR i.tbl_income_emp_id is null) AND (i.tbl_income_cabinet Like '%" + txt_cb_s.Text + "%' OR i.tbl_income_cabinet is null) AND i.tbl_income_money_bag Like'%" + txt_bag_s.Text + "%' ";
+                string sql = "SELECT * FROM tbl_income i JOIN tbl_status_around a ON i.tbl_income_around_id = a.tbl_status_around_id WHERE a.tbl_status_around_date = '" + date_value_s.Text + "' AND i.tbl_income_emp_id = '" + txt_emp_s.Text + "'  AND (i.tbl_income_cabinet Like '%" + txt_cb_s.Text + "%' OR i.tbl_income_cabinet is null) AND i.tbl_income_money_bag Like'%" + txt_bag_s.Text + "%' ";
                 if (txt_straps_s.Text != "")
                 {
                     sql += "AND i.tbl_income_straps LIKE '%" + txt_straps_s.Text + "%'";
@@ -269,7 +269,7 @@ namespace TIS
                         rs.Close();
                         script.CloseCon();
 
-                        if (txt_other_ts2.Text != "" && txt_other_sys.Text != "" && txt_other_ts2.Text != "0" && txt_other_sys.Text != "0")
+                        if ((txt_other_ts2.Text != "" && txt_other_sys.Text != "") && (txt_other_ts2.Text != "0" || txt_other_sys.Text != "0"))
                         {
                             AddBagForm addBag = new AddBagForm(income_around_id.Text);
                             addBag.ShowDialog();
